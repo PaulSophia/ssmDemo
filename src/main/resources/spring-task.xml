@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:task="http://www.springframework.org/schema/task" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+   http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd">
+   
+   
+	<!--配置任务类 -->
+	<bean id="taskJob" class="com.paul.ssm.task.spring.TaskJob"></bean>
+	
+	<!--定义触发类和触发方式 -->
+	<task:scheduled-tasks scheduler="myScheduler">
+		<task:scheduled ref="taskJob" method="run" cron="0/5 * *  * * ?" />
+	</task:scheduled-tasks>
+
+	<task:scheduler id="myScheduler" pool-size="10" />
+
+</beans>
